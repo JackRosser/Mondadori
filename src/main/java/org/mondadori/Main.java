@@ -22,9 +22,9 @@ public class Main {
         // Test UserDAO
         UserDAO userDAO = new UserDAO(em);
         User user = new User();
-        user.setNome("Mario");
-        user.setCognome("Rossi");
-        user.setDataDiNascita(LocalDate.of(1980, 5, 15));
+        user.setNome("Gino");
+        user.setCognome("Paoli");
+        user.setDataDiNascita(LocalDate.of(1999, 6, 20));
         user.setNumeroTessera("U12345");
         userDAO.save(user);
 
