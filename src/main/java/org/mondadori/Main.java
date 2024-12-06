@@ -129,7 +129,18 @@ public class Main {
                     System.out.println("Ricerca degli elementi in prestito");
                     System.out.print("Inserisci il numero di tessera utente: ");
                     String cardNumber = scanner.nextLine();
-                    // Aggiungi logica per cercare elementi in prestito
+                    List<Prestiti> prestiti = Funzioni.prestitoTessera(cardNumber);
+                    if (prestiti.isEmpty()) {
+                        System.out.println("Nessun prestito attivo trovato per il numero di tessera: " + cardNumber);
+                    } else {
+                        System.out.println("Prestiti attivi per il numero di tessera " + cardNumber + ":");
+                        for (Prestiti prestito : prestiti) {
+                            System.out.println("ID Prestito: " + prestito.getId() +
+                                    ", Titolo: " + prestito.getElementoPrestato().getTitolo() +
+                                    ", Data Inizio Prestito: " + prestito.getDataInizioPrestito() +
+                                    ", Data Restituzione Prevista: " + prestito.getDataRestituzionePrevista());
+                        }
+                    }
                     break;
 
                 case 8:

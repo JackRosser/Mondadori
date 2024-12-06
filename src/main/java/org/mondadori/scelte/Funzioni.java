@@ -128,16 +128,20 @@ public class Funzioni {
         }
     }
 
-    // Cerca tutti gli elementi in prestito attualmente non restituiti
-    public static List<Prestiti> trovaElementiInPrestito() {
+
+
+    // Cerca tutti gli elementi in prestito per numero di tessera
+    public static List<Prestiti> prestitoTessera(String numeroTessera) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Prestiti> query = em.createQuery(
-                    "SELECT p FROM Prestiti p WHERE p.dataRestituzioneEffettiva IS NULL", Prestiti.class
+                    "SELECT p FROM Prestiti p WHERE p.user.numeroTessera = :numeroTessera AND p.dataRestituzioneEffettiva IS NULL",
+                    Prestiti.class
             );
+            query.setParameter("numeroTessera", numeroTessera);
             List<Prestiti> risultati = query.getResultList();
             if (risultati.isEmpty()) {
-                System.out.println("Nessun elemento attualmente in prestito.");
+                System.out.println("Nessun prestito attivo trovato per il numero di tessera: " + numeroTessera);
             }
             return risultati;
         } finally {
@@ -145,22 +149,5 @@ public class Funzioni {
         }
     }
 
-    // Cerca i prestiti scaduti e non restituiti
-    public static List<Prestiti> trovaPrestitiScaduti() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Prestiti> query = em.createQuery(
-                    "SELECT p FROM Prestiti p WHERE p.dataRestituzioneEffettiva IS NULL AND p.dataRestituzionePrevista < :oggi",
-                    Prestiti.class
-            );
-            query.setParameter("oggi", LocalDate.now());
-            List<Prestiti> risultati = query.getResultList();
-            if (risultati.isEmpty()) {
-                System.out.println("Nessun prestito scaduto e non restituito.");
-            }
-            return risultati;
-        } finally {
-            em.close();
-        }
-    }
+
 }
