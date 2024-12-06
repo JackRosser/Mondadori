@@ -1,10 +1,10 @@
-package org.example;
+package org.mondadori;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class ApplicationTest {
+class MainTest {
 
     @Test
     void shouldAnswerWithTrue() {
