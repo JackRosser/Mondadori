@@ -15,6 +15,7 @@ import org.mondadori.scelte.Funzioni;
 
 import java.time.LocalDate;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -67,39 +68,67 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("Rimozione di un elemento del catalogo");
-                    System.out.print("Inserisci il codice ISBN: ");
-                    String isbnToRemove = scanner.nextLine();
-                    Funzioni.rimuoviLibro(isbnToRemove);
+                    loopOperation(scanner, () -> {
+                        System.out.println("Rimozione di un elemento del catalogo");
+                        System.out.print("Inserisci il codice ISBN (0 per tornare indietro): ");
+                        String isbnToRemove = scanner.nextLine();
+                        if (!isbnToRemove.equals("0")) {
+                            Funzioni.rimuoviLibro(isbnToRemove);
+                        }
+                    });
                     break;
 
                 case 3:
-                    System.out.println("Ricerca per ISBN");
-                    System.out.print("Inserisci il codice ISBN: ");
-                    String isbnToFind = scanner.nextLine();
-                    Funzioni.trovaLibroPerIsbn(isbnToFind);
+                    loopOperation(scanner, () -> {
+                        System.out.println("Ricerca per ISBN");
+                        System.out.print("Inserisci il codice ISBN (0 per tornare indietro): ");
+                        String isbnToFind = scanner.nextLine();
+                        if (!isbnToFind.equals("0")) {
+                            Libri libro = Funzioni.trovaLibroPerIsbn(isbnToFind);
+                            System.out.println(libro != null ? libro.getTitolo() : "Libro non trovato");
+                        }
+                    });
                     break;
 
                 case 4:
-                    System.out.println("Ricerca per anno di pubblicazione");
-                    System.out.print("Inserisci l'anno: ");
-                    int yearToFind = scanner.nextInt();
-                    scanner.nextLine();
-                    Funzioni.trovaLibriPerAnno(yearToFind);
+                    loopOperation(scanner, () -> {
+                        System.out.println("Ricerca per anno di pubblicazione");
+                        System.out.print("Inserisci l'anno (0 per tornare indietro): ");
+                        String yearInput = scanner.nextLine();
+                        if (!yearInput.equals("0")) {
+                            try {
+                                int yearToFind = Integer.parseInt(yearInput);
+                                List<Libri> libriPerAnno = Funzioni.trovaLibriPerAnno(yearToFind);
+                                libriPerAnno.forEach(libroYear -> System.out.println(libroYear.getTitolo()));
+                            } catch (NumberFormatException e) {
+                                System.out.println("Anno non valido. Inserisci un numero.");
+                            }
+                        }
+                    });
                     break;
 
                 case 5:
-                    System.out.println("Ricerca per autore");
-                    System.out.print("Inserisci il nome dell'autore: ");
-                    String authorToFind = scanner.nextLine();
-                    Funzioni.trovaLibriPerAutore(authorToFind);
+                    loopOperation(scanner, () -> {
+                        System.out.println("Ricerca per autore");
+                        System.out.print("Inserisci il nome dell'autore (0 per tornare indietro): ");
+                        String authorToFind = scanner.nextLine();
+                        if (!authorToFind.equals("0")) {
+                            List<Libri> libriPerAutore = Funzioni.trovaLibriPerAutore(authorToFind);
+                            libriPerAutore.forEach(libroAuthor -> System.out.println(libroAuthor.getTitolo()));
+                        }
+                    });
                     break;
 
                 case 6:
-                    System.out.println("Ricerca per titolo o parte di esso");
-                    System.out.print("Inserisci il titolo o una parte di esso: ");
-                    String titleToFind = scanner.nextLine();
-                    Funzioni.trovaLibriPerTitolo(titleToFind);
+                    loopOperation(scanner, () -> {
+                        System.out.println("Ricerca per titolo o parte di esso");
+                        System.out.print("Inserisci il titolo o una parte di esso (0 per tornare indietro): ");
+                        String titleToFind = scanner.nextLine();
+                        if (!titleToFind.equals("0")) {
+                            List<Libri> libriPerTitolo = Funzioni.trovaLibriPerTitolo(titleToFind);
+                            libriPerTitolo.forEach(libroTitle -> System.out.println(libroTitle.getTitolo()));
+                        }
+                    });
                     break;
 
                 case 7:
@@ -127,5 +156,15 @@ public class Main {
         em.close();
         emf.close();
     }
+
+    private static void loopOperation(Scanner scanner, Runnable operation) {
+        String input;
+        do {
+            operation.run();
+            System.out.println("Premi 0 per tornare indietro o Enter per continuare.");
+            input = scanner.nextLine();
+        } while (!input.equals("0"));
+    }
 }
+
 
