@@ -2,7 +2,7 @@ package org.mondadori.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.mondadori.entities.Libro;
+import org.mondadori.entities.Libri;
 
 
 public class LibroDAO {
@@ -15,11 +15,11 @@ this.em = em;
     }
 
 
-    public void save(Libro libro) {
+    public void save(Libri libri) {
 
         try {
             em.getTransaction().begin();
-            em.persist(libro);
+            em.persist(libri);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -27,8 +27,8 @@ this.em = em;
         }
     }
 
-    public Libro findById(String isbn) {
-     return em.find(Libro.class, isbn);
+    public Libri findById(String isbn) {
+     return em.find(Libri.class, isbn);
 
     }
 

@@ -1,7 +1,7 @@
 package org.mondadori.dao;
 
 import jakarta.persistence.EntityManager;
-import org.mondadori.entities.Rivista;
+import org.mondadori.entities.Riviste;
 
 public class RivistaDAO {
     private EntityManager em;
@@ -10,10 +10,10 @@ public class RivistaDAO {
         this.em = em;
     }
 
-    public void save(Rivista rivista) {
+    public void save(Riviste riviste) {
         try {
             em.getTransaction().begin();
-            em.persist(rivista);
+            em.persist(riviste);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -21,7 +21,7 @@ public class RivistaDAO {
         }
     }
 
-    public Rivista findById(String isbn) {
-        return em.find(Rivista.class, isbn);
+    public Riviste findById(String isbn) {
+        return em.find(Riviste.class, isbn);
     }
 }

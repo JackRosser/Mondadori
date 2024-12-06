@@ -7,9 +7,9 @@ import org.mondadori.dao.LibroDAO;
 import org.mondadori.dao.PrestitoDAO;
 import org.mondadori.dao.RivistaDAO;
 import org.mondadori.dao.UserDAO;
-import org.mondadori.entities.Libro;
-import org.mondadori.entities.Prestito;
-import org.mondadori.entities.Rivista;
+import org.mondadori.entities.Libri;
+import org.mondadori.entities.Prestiti;
+import org.mondadori.entities.Riviste;
 import org.mondadori.entities.User;
 
 import java.time.LocalDate;
@@ -33,42 +33,42 @@ public class Main {
 
         // Test LibroDAO
         LibroDAO libroDAO = new LibroDAO(em);
-        Libro libro = new Libro();
-        libro.setIsbn("978-3-16-148410-0");
-        libro.setTitolo("Il Signore degli Anelli");
-        libro.setAnnoPubblicazione(1954);
-        libro.setNumeroPagine(1178);
-        libro.setAutore("J.R.R. Tolkien");
-        libro.setGenere("Fantasy");
-        libroDAO.save(libro);
+        Libri libri = new Libri();
+        libri.setIsbn("978-3-16-148410-0");
+        libri.setTitolo("Il Signore degli Anelli");
+        libri.setAnnoPubblicazione(1954);
+        libri.setNumeroPagine(1178);
+        libri.setAutore("J.R.R. Tolkien");
+        libri.setGenere("Fantasy");
+        libroDAO.save(libri);
 
-        Libro foundLibro = libroDAO.findById(libro.getIsbn());
-        System.out.println("Libro found: " + (foundLibro != null ? foundLibro.getTitolo() : "Not found"));
+        Libri foundLibri = libroDAO.findById(libri.getIsbn());
+        System.out.println("Libro found: " + (foundLibri != null ? foundLibri.getTitolo() : "Not found"));
 
         // Test RivistaDAO
         RivistaDAO rivistaDAO = new RivistaDAO(em);
-        Rivista rivista = new Rivista();
-        rivista.setIsbn("12345");
-        rivista.setTitolo("Rivista di Tecnologia");
-        rivista.setAnnoPubblicazione(2024);
-        rivista.setNumeroPagine(50);
-        rivista.setPeriodicita(Rivista.Periodicita.MENSILE);
-        rivistaDAO.save(rivista);
+        Riviste riviste = new Riviste();
+        riviste.setIsbn("12345");
+        riviste.setTitolo("Rivista di Tecnologia");
+        riviste.setAnnoPubblicazione(2024);
+        riviste.setNumeroPagine(50);
+        riviste.setPeriodicita(Riviste.Periodicita.MENSILE);
+        rivistaDAO.save(riviste);
 
-        Rivista foundRivista = rivistaDAO.findById(rivista.getIsbn());
-        System.out.println("Rivista found: " + (foundRivista != null ? foundRivista.getTitolo() : "Not found"));
+        Riviste foundRiviste = rivistaDAO.findById(riviste.getIsbn());
+        System.out.println("Rivista found: " + (foundRiviste != null ? foundRiviste.getTitolo() : "Not found"));
 
         // Test PrestitoDAO
         PrestitoDAO prestitoDAO = new PrestitoDAO(em);
-        Prestito prestito = new Prestito();
-        prestito.setUser(user);
-        prestito.setElementoPrestato(libro);
-        prestito.setDataInizioPrestito(LocalDate.now());
-        prestito.setDataRestituzionePrevista(LocalDate.now().plusDays(30));
-        prestitoDAO.save(prestito);
+        Prestiti prestiti = new Prestiti();
+        prestiti.setUser(user);
+        prestiti.setElementoPrestato(libri);
+        prestiti.setDataInizioPrestito(LocalDate.now());
+        prestiti.setDataRestituzionePrevista(LocalDate.now().plusDays(30));
+        prestitoDAO.save(prestiti);
 
-        Prestito foundPrestito = prestitoDAO.findById(prestito.getId());
-        System.out.println("Prestito found: " + (foundPrestito != null ? "Prestito esistente" : "Not found"));
+        Prestiti foundPrestiti = prestitoDAO.findById(prestiti.getId());
+        System.out.println("Prestito found: " + (foundPrestiti != null ? "Prestito esistente" : "Not found"));
 
         // Close EntityManager and EntityManagerFactory
         em.close();

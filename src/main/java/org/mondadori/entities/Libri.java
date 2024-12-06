@@ -4,7 +4,7 @@ package org.mondadori.entities;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Libro extends Product {
+public class Libri extends Product {
     private String autore;
     private String genere;
 

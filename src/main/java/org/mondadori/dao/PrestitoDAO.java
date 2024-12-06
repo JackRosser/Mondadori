@@ -1,7 +1,7 @@
 package org.mondadori.dao;
 
 import jakarta.persistence.EntityManager;
-import org.mondadori.entities.Prestito;
+import org.mondadori.entities.Prestiti;
 
 public class PrestitoDAO {
     private EntityManager em; // Gestore delle operazioni di persistenza
@@ -10,10 +10,10 @@ public class PrestitoDAO {
         this.em = em;
     }
 
-    public void save(Prestito prestito) {
+    public void save(Prestiti prestiti) {
         try {
             em.getTransaction().begin(); // Inizio della transazione
-            em.persist(prestito);        // Salvataggio dell'entità
+            em.persist(prestiti);        // Salvataggio dell'entità
             em.getTransaction().commit(); // Completamento della transazione
         } catch (Exception e) {
             e.printStackTrace();         // Log dell'errore
@@ -21,7 +21,7 @@ public class PrestitoDAO {
         }
     }
 
-    public Prestito findById(Long id) {
-        return em.find(Prestito.class, id); // Ricerca tramite la classe e l'ID
+    public Prestiti findById(Long id) {
+        return em.find(Prestiti.class, id); // Ricerca tramite la classe e l'ID
     }
 }

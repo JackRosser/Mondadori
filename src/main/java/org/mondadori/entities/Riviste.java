@@ -6,7 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 @Entity
-public class Rivista extends Product {
+public class Riviste extends Product {
     @Enumerated(EnumType.STRING)
     private Periodicita periodicita;
 
