@@ -145,8 +145,17 @@ public class Main {
 
                 case 8:
                     System.out.println("Ricerca prestiti scaduti e non restituiti");
-                    // Aggiungi logica per cercare prestiti scaduti
+                    List<Prestiti> prestitiScaduti = Funzioni.cercaPrestitiScadutiNonRestituiti();
+                    if (!prestitiScaduti.isEmpty()) {
+                        for (Prestiti prestito : prestitiScaduti) {
+                            System.out.println("ID Prestito: " + prestito.getId() +
+                                    ", Titolo: " + prestito.getElementoPrestato().getTitolo() +
+                                    ", Data Restituzione Prevista: " + prestito.getDataRestituzionePrevista() +
+                                    ", Utente: " + prestito.getUser().getNome() + " " + prestito.getUser().getCognome());
+                        }
+                    }
                     break;
+
 
                 case 0:
                     System.out.println("Ciao e grazie");

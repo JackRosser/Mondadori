@@ -149,5 +149,39 @@ public class Funzioni {
         }
     }
 
+    // Cerca libri non restituiti
+
+    public static List<Prestiti> cercaPrestitiScadutiNonRestituiti() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            LocalDate today = LocalDate.now();
+            TypedQuery<Prestiti> query = em.createQuery(
+                    "SELECT p FROM Prestiti p " +
+                            "WHERE p.dataRestituzionePrevista < :today " +
+                            "AND p.dataRestituzioneEffettiva IS NULL",
+                    Prestiti.class
+            );
+            query.setParameter("today", today);
+            List<Prestiti> risultati = query.getResultList();
+
+            if (risultati.isEmpty()) {
+                System.out.println("Nessun prestito scaduto e non restituito trovato.");
+            } else {
+                System.out.println("Prestiti scaduti e non restituiti:");
+                for (Prestiti prestito : risultati) {
+                    System.out.println("ID Prestito: " + prestito.getId() +
+                            ", Titolo: " + prestito.getElementoPrestato().getTitolo() +
+                            ", Data Restituzione Prevista: " + prestito.getDataRestituzionePrevista() +
+                            ", Utente: " + prestito.getUser().getNome() + " " + prestito.getUser().getCognome());
+                }
+            }
+
+            return risultati;
+        } finally {
+            em.close();
+        }
+    }
+
+
 
 }
