@@ -14,7 +14,6 @@ public class MainPrestiti {
 
         PrestitoDAO prestitoDAO = new PrestitoDAO(em);
 
-        // Associare il libro all'utente
         Long userId = 1L;
         String isbn = "978-3-16-148410-0";
         LocalDate dataInizio = LocalDate.now();
