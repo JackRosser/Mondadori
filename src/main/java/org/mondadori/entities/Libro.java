@@ -1,6 +1,7 @@
 package org.mondadori.entities;
 
-import javax.persistence.Entity;
+
+import jakarta.persistence.Entity;
 
 @Entity
 public class Libro extends Product {

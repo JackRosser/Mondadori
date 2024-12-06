@@ -1,11 +1,18 @@
 package org.mondadori;
 
-import org.mondadori.DAO.LibroDAO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import org.mondadori.dao.LibroDAO;
 import org.mondadori.entities.Libro;
+
 
 public class Main {
     public static void main(String[] args) {
-        LibroDAO libroDAO = new LibroDAO();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit");
+        EntityManager em = emf.createEntityManager();
+        LibroDAO libroDAO = new LibroDAO(em);
+
 
         Libro libro = new Libro();
         libro.setIsbn("978-3-16-148410-0");
@@ -24,6 +31,6 @@ public class Main {
             System.out.println("Libro non trovato.");
         }
 
-        libroDAO.close();
+em.close();
     }
 }
