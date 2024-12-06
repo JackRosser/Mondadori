@@ -21,12 +21,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit");
-        EntityManager em = emf.createEntityManager();
-
-        UserDAO userDAO = new UserDAO(em);
-        LibroDAO libroDAO = new LibroDAO(em);
-        RivistaDAO rivistaDAO = new RivistaDAO(em);
-        PrestitoDAO prestitoDAO = new PrestitoDAO(em);
 
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -153,7 +147,6 @@ public class Main {
         } while (choice != 0);
 
         scanner.close();
-        em.close();
         emf.close();
     }
 

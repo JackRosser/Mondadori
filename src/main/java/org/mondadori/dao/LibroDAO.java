@@ -16,16 +16,14 @@ this.em = em;
 
 
     public void save(Libri libri) {
-
         try {
-            em.getTransaction().begin();
-            em.persist(libri);
-            em.getTransaction().commit();
+            em.persist(libri); // Inserisce l'entità senza gestire la transazione
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            throw new RuntimeException("Errore durante il salvataggio del libro", e);
         }
     }
+
 
     public Libri findById(String isbn) {
      return em.find(Libri.class, isbn);
