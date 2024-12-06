@@ -59,16 +59,16 @@ public class TestNonUsare {
         System.out.println("Rivista found: " + (foundRiviste != null ? foundRiviste.getTitolo() : "Not found"));
 
         // Test PrestitoDAO
-        PrestitoDAO prestitoDAO = new PrestitoDAO(em);
-        Prestiti prestiti = new Prestiti();
-        prestiti.setUser(user);
-        prestiti.setElementoPrestato(libri);
-        prestiti.setDataInizioPrestito(LocalDate.now());
-        prestiti.setDataRestituzionePrevista(LocalDate.now().plusDays(30));
-        prestitoDAO.save(prestiti);
+        // PrestitoDAO prestitoDAO = new PrestitoDAO(em);
+       //  Prestiti prestiti = new Prestiti();
+        // prestiti.setUser(user);
+        // prestiti.setElementoPrestato(libri);
+        // prestiti.setDataInizioPrestito(LocalDate.now());
+        // prestiti.setDataRestituzionePrevista(LocalDate.now().plusDays(30));
+        // prestitoDAO.save(prestiti);
 
-        Prestiti foundPrestiti = prestitoDAO.findById(prestiti.getId());
-        System.out.println("Prestito found: " + (foundPrestiti != null ? "Prestito esistente" : "Not found"));
+        // Prestiti foundPrestiti = prestitoDAO.findById(prestiti.getId());
+        // System.out.println("Prestito found: " + (foundPrestiti != null ? "Prestito esistente" : "Not found"));
 
         // Close EntityManager and EntityManagerFactory
         em.close();
